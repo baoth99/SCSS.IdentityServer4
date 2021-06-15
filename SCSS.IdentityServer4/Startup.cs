@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SCSS.IdentityServer4.SystemConfigurations;
+using SCSS.Utilities.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +18,35 @@ namespace SCSS.IdentityServer4
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
 
+        public IWebHostEnvironment Enviroment { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment enviroment)
+        {
+            Configuration = configuration;
+            Enviroment = enviroment;
+        }
+
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            #region Configuration Helper
+
+            services.AddSingleton(Configuration);
+            ConfigurationHelper.Configuration = Configuration;
+            ConfigurationHelper.IsDevelopment = Enviroment.IsDevelopment();
+            ConfigurationHelper.IsTesting = Enviroment.EnvironmentName.Equals("Testing");
+            ConfigurationHelper.IsProduction = Enviroment.IsProduction();
+
+            #endregion
+
+
+            services.AddIISServerConfigSetUp();
+            services.AddIdentityConfigSetUp();
+            services.AddIdentityServer4SetUp();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -45,6 +66,8 @@ namespace SCSS.IdentityServer4
             }
 
             app.UseHttpsRedirection();
+
+            app.UseIdentityServer();
 
             app.UseRouting();
 
