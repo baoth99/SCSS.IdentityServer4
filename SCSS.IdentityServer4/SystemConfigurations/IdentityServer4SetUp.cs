@@ -21,6 +21,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
 
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
+            //var connectionString = "Data Source=scss-database.cehfzxl85v4h.ap-southeast-1.rds.amazonaws.com;Initial Catalog=SCSS-DB-IdentityServer4;User ID=admin;Password=scsspassword123";
 
             services.AddIdentityServer(options =>
             {
@@ -34,12 +35,12 @@ namespace SCSS.IdentityServer4.SystemConfigurations
             .AddDeveloperSigningCredential()
             .AddConfigurationStore(option =>
             {
-                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.SqlConnectionString,
+                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.IndentityServer4SqlConnectionString,
                         sql => sql.MigrationsAssembly(migrationsAssembly));
             })
             .AddOperationalStore(option =>
             {
-                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.SqlConnectionString,
+                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.IndentityServer4SqlConnectionString,
                     sql => sql.MigrationsAssembly(migrationsAssembly));
             });
         }

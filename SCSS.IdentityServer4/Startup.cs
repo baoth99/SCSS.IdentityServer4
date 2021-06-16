@@ -45,7 +45,9 @@ namespace SCSS.IdentityServer4
 
 
             services.AddIISServerConfigSetUp();
+
             services.AddIdentityConfigSetUp();
+
             services.AddIdentityServer4SetUp();
 
             services.AddControllers();

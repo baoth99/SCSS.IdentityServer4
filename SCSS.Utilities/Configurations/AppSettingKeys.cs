@@ -10,7 +10,8 @@ namespace SCSS.Utilities.Configurations
     {
         public static class ConnectionString
         {
-            public const string SQLConnectionString = "ConnectionStrings:SQLConnectionString";
+            public const string IndentityServer4SQLConnectionString = "ConnectionStrings:IndentityServer4SQLConnectionString";
+            public const string IndentitySQLConnectionString = "ConnectionStrings:IndentitySQLConnectionString";
         }
 
         public static class SystemConfig

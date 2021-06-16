@@ -20,9 +20,10 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                 throw new ArgumentException(nameof(services));
             }
 
+
             services.AddDbContext<IdentityDBContext>(config =>
             {
-                config.UseSqlServer(AppSettingValues.SqlConnectionString);
+                config.UseSqlServer(AppSettingValues.IndentitySqlConnectionString);
             });
 
 

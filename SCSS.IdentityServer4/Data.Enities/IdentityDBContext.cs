@@ -16,8 +16,7 @@ namespace SCSS.IdentityServer4.Data.Enities
         /// Initializes a new instance of the <see cref="IdentityDBContext"/> class.
         /// </summary>
         /// <param name="options">The options.</param>
-        public IdentityDBContext(DbContextOptions<IdentityDBContext> options)
-            : base(options)
+        public IdentityDBContext(DbContextOptions<IdentityDBContext> options) : base(options)
         {
 
         }
@@ -25,6 +24,7 @@ namespace SCSS.IdentityServer4.Data.Enities
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.Entity<ApplicationUser>(
                 users =>
                 {
@@ -33,6 +33,9 @@ namespace SCSS.IdentityServer4.Data.Enities
                         .HasForeignKey(x => x.UserId)
                         .IsRequired()
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    users.ToTable("AspNetUsers")
+                        .Property(p => p.Id).HasColumnName("Id");
                 });
         }
     }

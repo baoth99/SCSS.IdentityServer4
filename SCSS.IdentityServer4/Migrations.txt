@@ -1,6 +1,6 @@
 ﻿Add-Migration InitialPersistedGrantDbMigration -c PersistedGrantDbContext -o Migrations/IdentityServer/PersistedGrantDb
 Add-Migration InitialConfigurationDbMigration -c ConfigurationDbContext -o Migrations/IdentityServer/ConfigurationDb
-Add-Migration InitialIdentityDbMigration - c IdentityDBContext -o Migrations/Identity
+Add-Migration InitialIdentityDbMigration -c IdentityDBContext -o Migrations/Identity
 
 
 
@@ -8,3 +8,6 @@ Add-Migration InitialIdentityDbMigration - c IdentityDBContext -o Migrations/Ide
 Update-Database -Context PersistedGrantDbContext
 Update-Database -Context ConfigurationDbContext
 Update-Database -Context IdentityDBContext
+
+var connectionString = "Data Source=scss-database.cehfzxl85v4h.ap-southeast-1.rds.amazonaws.com;Initial Catalog=SCSS-DB-Identity;User ID=admin;Password=scsspassword123";
+"Data Source=scss-database.cehfzxl85v4h.ap-southeast-1.rds.amazonaws.com;Initial Catalog=SCSS-DB-IdentityServer4;User ID=admin;Password=scsspassword123",
