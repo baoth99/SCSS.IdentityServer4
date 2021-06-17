@@ -20,10 +20,12 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                 throw new ArgumentException(nameof(services));
             }
 
+            //var connectionString = "Data Source=scss-database.cehfzxl85v4h.ap-southeast-1.rds.amazonaws.com;Initial Catalog=SCSS-DB-IdentityServer4;User ID=admin;Password=scsspassword123";
+
 
             services.AddDbContext<IdentityDBContext>(config =>
             {
-                config.UseSqlServer(AppSettingValues.IndentitySqlConnectionString);
+                config.UseSqlServer(AppSettingValues.SqlConnectionString);
             });
 
 

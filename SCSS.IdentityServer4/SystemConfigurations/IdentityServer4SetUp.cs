@@ -44,12 +44,12 @@ namespace SCSS.IdentityServer4.SystemConfigurations
             .AddDeveloperSigningCredential()
             .AddConfigurationStore(option =>
             {
-                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.IndentityServer4SqlConnectionString,
+                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.SqlConnectionString,
                         sql => sql.MigrationsAssembly(migrationsAssembly));
             })
             .AddOperationalStore(option =>
             {
-                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.IndentityServer4SqlConnectionString,
+                option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.SqlConnectionString,
                     sql => sql.MigrationsAssembly(migrationsAssembly));
             });
         }

@@ -10,9 +10,7 @@ namespace SCSS.Utilities.Configurations
     {
         public static int CommandTimeout => ConfigurationHelper.GetValue<int>(AppSettingKeys.SystemConfig.CommandTimeOut);
 
-        public static string IndentityServer4SqlConnectionString => ConfigurationHelper.GetValue<string>(AppSettingKeys.ConnectionString.IndentityServer4SQLConnectionString);
-
-        public static string IndentitySqlConnectionString => ConfigurationHelper.GetValue<string>(AppSettingKeys.ConnectionString.IndentitySQLConnectionString);
+        public static string SqlConnectionString => ConfigurationHelper.GetValue<string>(AppSettingKeys.ConnectionString.SQLConnectionString);
 
         public static bool ReadScaleOut => ConfigurationHelper.GetValue<bool>(AppSettingKeys.SystemConfig.ReadScaleOut);
 

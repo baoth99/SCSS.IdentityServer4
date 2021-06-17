@@ -75,7 +75,7 @@ namespace SCSS.IdentityServer4
 
             app.UseIdentityServer();
 
-            //app.UseInitializeDatabaseSetUp();
+            app.UseInitializeDatabaseSetUp();
 
             app.UseRouting();
 
