@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SCSS.IdentityServer4.Data.Enities;
-using SCSS.IdentityServer4.Enities;
+using SCSS.IdentityServer4.Data.IdenittyEF;
+using SCSS.IdentityServer4.Data.Identity;
 using SCSS.Utilities.Configurations;
 using System;
 using System.Collections.Generic;

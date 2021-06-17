@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SCSS.IdentityServer4.Enities
+namespace SCSS.IdentityServer4.Data.Identity
 {
     public class ApplicationUser : IdentityUser
     {
         public ICollection<IdentityUserClaim<string>> Claims { get; set; } = new List<IdentityUserClaim<string>>();
-
-        public bool? IsEnabled { get; set; }
     }
 }

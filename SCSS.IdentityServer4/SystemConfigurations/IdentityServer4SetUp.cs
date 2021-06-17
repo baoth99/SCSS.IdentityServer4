@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IdentityServer4.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SCSS.IdentityServer4.Enities;
+using SCSS.IdentityServer4.Constants;
+using SCSS.IdentityServer4.Data.Identity;
 using SCSS.Utilities.Configurations;
 using System;
 using System.Collections.Generic;
@@ -30,8 +32,15 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.Endpoints.EnableUserInfoEndpoint = true;
-
-            }).AddAspNetIdentity<ApplicationUser>()
+                options.UserInteraction.LoginUrl = IdenittyUrlDefination.UserInteractionLoginUrl;
+                options.UserInteraction.LogoutUrl = IdenittyUrlDefination.UserInteractionLogoutUrl;
+                options.Authentication = new AuthenticationOptions()
+                {
+                    CookieLifetime = TimeSpan.FromHours(10), // ID server cookie timeout set to 10 hours
+                    CookieSlidingExpiration = true
+                };
+            })
+            .AddAspNetIdentity<ApplicationUser>()
             .AddDeveloperSigningCredential()
             .AddConfigurationStore(option =>
             {

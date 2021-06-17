@@ -15,14 +15,71 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                {
                                     new ApiScope()
                                     {
-                                        Name = "SCSS.WebApi",
-                                        DisplayName = "SCSS WebApi",
+                                        Name = "SCSS.WebAdmin.Scope",
+                                        DisplayName = "SCSS Web Admin Scope",
                                         UserClaims =
                                         {
-                                            "given_name", "family_name", "role"
+                                            JwtClaimTypes.Address,
+                                            JwtClaimTypes.PhoneNumber,
+                                            JwtClaimTypes.Role,
+                                            JwtClaimTypes.Gender,
+                                            JwtClaimTypes.BirthDate,
+                                            JwtClaimTypes.Name,
+                                            JwtClaimTypes.Email,
+                                            JwtClaimTypes.Picture,
+                                            JwtClaimTypes.Id
                                         },
-
-
+                                    },
+                                    new ApiScope()
+                                    {
+                                        Name = "SCSS.SellerMobileApp.Scope",
+                                        DisplayName = "SCSS Seller Mobile App Scope",
+                                        UserClaims =
+                                        {
+                                            JwtClaimTypes.Address,
+                                            JwtClaimTypes.PhoneNumber,
+                                            JwtClaimTypes.Role,
+                                            JwtClaimTypes.Gender,
+                                            JwtClaimTypes.BirthDate,
+                                            JwtClaimTypes.Name,
+                                            JwtClaimTypes.Email,
+                                            JwtClaimTypes.Picture,
+                                            JwtClaimTypes.Id
+                                        },
+                                    },
+                                    new ApiScope()
+                                    {
+                                        Name = "SCSS.CollectorMobileApp.Scope",
+                                        DisplayName = "SCSS Collector Mobile App Scope",
+                                        UserClaims =
+                                        {
+                                            JwtClaimTypes.Address,
+                                            JwtClaimTypes.PhoneNumber,
+                                            JwtClaimTypes.Role,
+                                            JwtClaimTypes.Gender,
+                                            JwtClaimTypes.BirthDate,
+                                            JwtClaimTypes.Name,
+                                            JwtClaimTypes.Email,
+                                            JwtClaimTypes.Picture,
+                                            JwtClaimTypes.Id
+                                        },
+                                    },
+                                    new ApiScope()
+                                    {
+                                        Name = "SCSS.DealerMobileApp.Scope",
+                                        DisplayName = "SCSS Dealer Mobile App Scope",
+                                        UserClaims =
+                                        {
+                                            JwtClaimTypes.Address,
+                                            JwtClaimTypes.PhoneNumber,
+                                            JwtClaimTypes.Role,
+                                            JwtClaimTypes.Gender,
+                                            JwtClaimTypes.BirthDate,
+                                            JwtClaimTypes.Name,
+                                            JwtClaimTypes.Email,
+                                            JwtClaimTypes.Picture,
+                                            JwtClaimTypes.Id
+                                        },
                                     }
                                };
 
@@ -37,14 +94,27 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         {
                                             new Secret("82e25d5b-40a7-41a0-9a71-4f6766ff7fb6".Sha256())
                                         },
-                                        Scopes= { "SCSS.WebApi",
+                                        Scopes= {
+                                            "SCSS.WebAdmin.Scope",
+                                            "SCSS.SellerMobileApp.Scope",
+                                            "SCSS.CollectorMobileApp.Scope",
+                                            "SCSS.DealerMobileApp.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
-                                            "roles"
+                                            IdentityServerConstants.StandardScopes.OfflineAccess,
+                                            "role"
                                         },
                                         UserClaims =
                                         {
-                                            "given_name", "family_name", "role",
+                                            JwtClaimTypes.Address,
+                                            JwtClaimTypes.PhoneNumber,
+                                            JwtClaimTypes.Role,
+                                            JwtClaimTypes.Gender,
+                                            JwtClaimTypes.BirthDate,
+                                            JwtClaimTypes.Name,
+                                            JwtClaimTypes.Email,
+                                            JwtClaimTypes.Picture,
+                                            JwtClaimTypes.Id
                                         },
 
                                     }
@@ -60,8 +130,8 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                     new IdentityResources.Phone(),
                                     new IdentityResource
                                     {
-                                        Name = "roles",
-                                        DisplayName = "Roles",
+                                        Name = "role",
+                                        DisplayName = "Role",
                                         UserClaims = { JwtClaimTypes.Role }
                                     }
                                 };
@@ -72,8 +142,8 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                 {
                                     new Client
                                     {
-                                        ClientId = "WebAdmin-FrontEnd",
-                                        ClientName = "WebAdmin-Application",                                     
+                                        ClientId = "SCSS-WebAdmin-FrontEnd",
+                                        ClientName = "Scrap WebAdmin Application",                                     
                                         // no interactive user, use the clientid/secret for authentication phone_number_token
                                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                                         // secret for authentication using SHA256
@@ -90,22 +160,23 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         AccessTokenType = AccessTokenType.Jwt, 
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
-                                        AllowedScopes = { "SCSS.WebApi",
+                                        AllowedScopes = { 
+                                            "SCSS.WebAdmin.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
                                             "role"
                                             },
-                                        AccessTokenLifetime = 3600 * 2 , //Set Token lifetime
+                                        AllowAccessTokensViaBrowser = true,
+                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
-                                        RedirectUris = { "https://localhost:5001/signin-oidc" }
 
                                     },
                                     new Client
                                     {
-                                        ClientId = "Seller-Mobile",
-                                        ClientName = "Seller Mobile Application",                                     
+                                        ClientId = "SCSS-Seller-Mobile",
+                                        ClientName = "Scrap Seller Mobile Application",                                     
                                         // no interactive user, use the clientid/secret for authentication phone_number_token
                                         AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                                         // secret for authentication using SHA256
@@ -118,11 +189,12 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
                                                                                //the lifetime of the refresh token will be renewed
                                                                                //when refreshing the token, the lifetime of the refresh token will be renewed
-                                        SlidingRefreshTokenLifetime = 3600 * 2,
+                                        SlidingRefreshTokenLifetime = 3600 * 4,
                                         AccessTokenType = AccessTokenType.Jwt,
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
-                                        AllowedScopes = { "SCSS.WebApi",
+                                        AllowedScopes = { 
+                                            "SCSS.SellerMobileApp.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
@@ -132,6 +204,68 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
 
+                                    },
+                                    new Client
+                                    {
+                                        ClientId = "SCSS-Collector-Mobile",
+                                        ClientName = "Scrap Collector Mobile Application",                                     
+                                        // no interactive user, use the clientid/secret for authentication phone_number_token
+                                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                                        // secret for authentication using SHA256
+                                        ClientSecrets =
+                                        {
+                                            new Secret("8adb9943-07b1-4ada-91dd-ba91560085e5".Sha256())
+                                        },
+                                        AlwaysSendClientClaims = true,
+                                        AlwaysIncludeUserClaimsInIdToken = true,
+                                        RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
+                                                                               //the lifetime of the refresh token will be renewed
+                                                                               //when refreshing the token, the lifetime of the refresh token will be renewed
+                                        SlidingRefreshTokenLifetime = 3600 * 2,
+                                        AccessTokenType = AccessTokenType.Jwt,
+                                        UpdateAccessTokenClaimsOnRefresh = true,
+                                        // scopes that client can access to
+                                        AllowedScopes = {
+                                            "SCSS.CollectorMobileApp.Scope",
+                                            IdentityServerConstants.StandardScopes.OpenId,
+                                            IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.OfflineAccess,
+                                            "role"
+                                            },
+                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
+                                        RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                                        AllowOfflineAccess = true,
+                                    },
+                                    new Client
+                                    {
+                                        ClientId = "SCSS-Dealer-Mobile",
+                                        ClientName = "Scrap Dealer Mobile Application",                                     
+                                        // no interactive user, use the clientid/secret for authentication phone_number_token
+                                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                                        // secret for authentication using SHA256
+                                        ClientSecrets =
+                                        {
+                                            new Secret("bf2388cd-907f-4933-8f4c-1239c0674437".Sha256())
+                                        },
+                                        AlwaysSendClientClaims = true,
+                                        AlwaysIncludeUserClaimsInIdToken = true,
+                                        RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
+                                                                               //the lifetime of the refresh token will be renewed
+                                                                               //when refreshing the token, the lifetime of the refresh token will be renewed
+                                        SlidingRefreshTokenLifetime = 3600 * 2,
+                                        AccessTokenType = AccessTokenType.Jwt,
+                                        UpdateAccessTokenClaimsOnRefresh = true,
+                                        // scopes that client can access to
+                                        AllowedScopes = {
+                                            "SCSS.DealerMobileApp.Scope",
+                                            IdentityServerConstants.StandardScopes.OpenId,
+                                            IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.OfflineAccess,
+                                            "role"
+                                            },
+                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
+                                        RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                                        AllowOfflineAccess = true,
                                     }
                                 };
     }

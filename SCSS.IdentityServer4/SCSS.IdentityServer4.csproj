@@ -35,4 +35,9 @@
     <ProjectReference Include="..\SCSS.Utilities\SCSS.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Services\Implementations\" />
+  </ItemGroup>
+
 </Project>

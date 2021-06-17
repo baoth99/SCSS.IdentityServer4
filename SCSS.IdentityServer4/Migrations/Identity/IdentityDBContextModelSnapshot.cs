@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SCSS.IdentityServer4.Data.Enities;
+using SCSS.IdentityServer4.Data.IdenittyEF;
 
 namespace SCSS.IdentityServer4.Migrations.Identity
 {

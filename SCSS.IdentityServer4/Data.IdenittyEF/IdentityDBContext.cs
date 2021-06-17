@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SCSS.IdentityServer4.Enities;
+using SCSS.IdentityServer4.Data.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SCSS.IdentityServer4.Data.Enities
+namespace SCSS.IdentityServer4.Data.IdenittyEF
 {
     public class IdentityDBContext : IdentityDbContext
     {

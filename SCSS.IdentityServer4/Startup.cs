@@ -43,6 +43,10 @@ namespace SCSS.IdentityServer4
 
             #endregion
 
+            services.AddRouting(options =>
+            {
+                options.LowercaseUrls = true;
+            });
 
             services.AddIISServerConfigSetUp();
 
@@ -70,6 +74,8 @@ namespace SCSS.IdentityServer4
             app.UseHttpsRedirection();
 
             app.UseIdentityServer();
+
+            //app.UseInitializeDatabaseSetUp();
 
             app.UseRouting();
 
