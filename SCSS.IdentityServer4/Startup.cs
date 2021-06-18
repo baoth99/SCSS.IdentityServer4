@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -73,14 +74,17 @@ namespace SCSS.IdentityServer4
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SCSS.IdentityServer4 v1"));
             }
 
+            app.UseRouting();
+            app.UseIdentityServer();
+            app.UseAuthentication();
+
+            app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict, Secure = CookieSecurePolicy.None });
+
+            app.UseHsts();
             app.UseHttpsRedirection();
 
-            app.UseIdentityServer();
 
             app.UseInitializeDatabaseSetUp();
-
-            app.UseRouting();
-
 
             app.UseStaticFiles();
 
