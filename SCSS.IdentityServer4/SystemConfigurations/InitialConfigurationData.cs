@@ -133,6 +133,12 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         Name = "role",
                                         DisplayName = "Role",
                                         UserClaims = { JwtClaimTypes.Role }
+                                    },
+                                    new IdentityResource
+                                    {
+                                        Name = "id_card",
+                                        DisplayName = "IDCard",
+                                        UserClaims = { JwtClaimTypes.Id }
                                     }
                                 };
 
@@ -164,8 +170,11 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "SCSS.WebAdmin.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.Phone,
+                                            IdentityServerConstants.StandardScopes.Email,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
-                                            "role"
+                                            "role",
+                                            "id_card"
                                             },
                                         AllowAccessTokensViaBrowser = true,
                                         AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
@@ -197,8 +206,11 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "SCSS.SellerMobileApp.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.Phone,
+                                            IdentityServerConstants.StandardScopes.Email,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
-                                            "role"
+                                            "role",
+                                            "id_card"
                                             },
                                         AccessTokenLifetime = 3600 * 2 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
@@ -229,8 +241,11 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "SCSS.CollectorMobileApp.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.Phone,
+                                            IdentityServerConstants.StandardScopes.Email,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
-                                            "role"
+                                            "role",
+                                            "id_card"
                                             },
                                         AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
@@ -260,8 +275,11 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "SCSS.DealerMobileApp.Scope",
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
+                                            IdentityServerConstants.StandardScopes.Phone,
+                                            IdentityServerConstants.StandardScopes.Email,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
-                                            "role"
+                                            "role",
+                                            "id_card"
                                             },
                                         AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
