@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SCSS.IdentityServer4.Data.Identity;
+using SCSS.Utilities.Constants;
 
 namespace SCSS.IdentityServer4.Areas.Identity.Pages.Account
 {
@@ -85,8 +86,18 @@ namespace SCSS.IdentityServer4.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var user = await _userManager.FindByNameAsync(Input.Email);
+                    var userRoles = await _userManager.GetRolesAsync(user);
+                    var roleName = userRoles.FirstOrDefault();
+
+                    if (roleName.Equals(AccountRoleConstants.ADMIN))
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    ModelState.AddModelError(string.Empty, "Account is unauthorized !");
+                    _logger.LogWarning("Account is unauthorized");
+                    return Page();
                 }
                 if (result.RequiresTwoFactor)
                 {

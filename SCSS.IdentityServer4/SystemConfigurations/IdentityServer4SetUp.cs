@@ -34,11 +34,11 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                 options.Endpoints.EnableUserInfoEndpoint = true;
                 options.UserInteraction.LoginUrl = IdenittyUrlDefination.UserInteractionLoginUrl;
                 options.UserInteraction.LogoutUrl = IdenittyUrlDefination.UserInteractionLoginUrl;
-                options.Authentication = new AuthenticationOptions()
-                {
-                    CookieLifetime = TimeSpan.FromHours(10), // ID server cookie timeout set to 10 hours
-                    CookieSlidingExpiration = true
-                };
+                //options.Authentication = new AuthenticationOptions()
+                //{
+                //    CookieLifetime = TimeSpan.FromHours(10), // ID server cookie timeout set to 10 hours
+                //    CookieSlidingExpiration = true
+                //};
             })
             .AddAspNetIdentity<ApplicationUser>()
             .AddDeveloperSigningCredential()

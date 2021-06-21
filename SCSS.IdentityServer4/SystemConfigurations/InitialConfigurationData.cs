@@ -102,7 +102,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             IdentityServerConstants.StandardScopes.OpenId,
                                             IdentityServerConstants.StandardScopes.Profile,
                                             IdentityServerConstants.StandardScopes.OfflineAccess,
-                                            "role"
+                                            "role",
                                         },
                                         UserClaims =
                                         {

@@ -56,8 +56,10 @@ namespace SCSS.IdentityServer4
             services.AddIdentityServer4SetUp();
 
             services.AddControllers();
+
             services.AddRazorPages();
             services.AddMvc();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCSS.IdentityServer4", Version = "v1" });
