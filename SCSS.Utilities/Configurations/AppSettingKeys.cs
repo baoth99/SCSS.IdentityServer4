@@ -18,5 +18,11 @@ namespace SCSS.Utilities.Configurations
             public const string CommandTimeOut = "SystemConfig:CommandTimeout";
             public const string ReadScaleOut = "SystemConfig:ReadScaleOut";
         }
+
+        public static class Sercurity
+        {
+            public const string SercurityId = "Sercurity:SercurityId";
+            public const string SercuritySecret = "Sercurity:SercuritySecret";
+        }
     }
 }

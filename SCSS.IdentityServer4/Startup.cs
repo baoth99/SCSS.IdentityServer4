@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SCSS.IdentityServer4.AuthenFilter;
+using SCSS.IdentityServer4.Services.Implementations;
+using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.IdentityServer4.SystemConfigurations;
 using SCSS.Utilities.Configurations;
 using System;
@@ -48,6 +51,12 @@ namespace SCSS.IdentityServer4
             {
                 options.LowercaseUrls = true;
             });
+
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ISMSService, SMSService>();
+            services.AddScoped<AuthenFilterAttribute>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddIISServerConfigSetUp();
 

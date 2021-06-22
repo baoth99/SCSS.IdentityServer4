@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SCSS.IdentityServer4.Models.RequestModels
+namespace SCSS.IdentityServer4.Models.ResponseModels
 {
-    public class AccountRegistrationRequestModel
+    public class AccountRegistrationResponseModel
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
         public string Password { get; set; }
@@ -22,6 +24,8 @@ namespace SCSS.IdentityServer4.Models.RequestModels
         public string BirthDate { get; set; }
 
         public string Image { get; set; }
+
+        public int Status { get; set; }
 
         public string IDCard { get; set; }
     }

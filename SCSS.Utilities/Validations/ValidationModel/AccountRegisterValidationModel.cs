@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SCSS.IdentityServer4.Models.RequestModels
+namespace SCSS.Utilities.Validations.ValidationModel
 {
-    public class AccountRegistrationRequestModel
+    public class AccountRegisterValidationModel
     {
         public string Name { get; set; }
 

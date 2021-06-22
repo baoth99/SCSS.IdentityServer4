@@ -9,6 +9,7 @@ namespace SCSS.IdentityServer4.Controllers
 {
     [Route(ApplicationRestfulApi.BaseApiUrl)]
     [Produces(ApplicationRestfulApi.ApplicationProduce)]
+    [Consumes(ApplicationRestfulApi.ApplicationConsumes)]
     [ApiController]
     public class BaseController : ControllerBase
     {

@@ -9,5 +9,7 @@ namespace SCSS.IdentityServer4.Data.Identity
     public class ApplicationUser : IdentityUser
     {
         public ICollection<IdentityUserClaim<string>> Claims { get; set; } = new List<IdentityUserClaim<string>>();
+
+        public int? Status { get; set; }
     }
 }

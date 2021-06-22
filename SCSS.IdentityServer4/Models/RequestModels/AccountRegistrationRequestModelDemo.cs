@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.Models.RequestModels
 {
-    public class AccountRegistrationRequestModel
+    public class AccountRegistrationRequestModelDemo
     {
         public string Name { get; set; }
 
-        public string Password { get; set; }
+        public string UserName { get; set; }
+
+        public string  Password { get; set; }
 
         public string Email { get; set; }
 
@@ -22,6 +24,8 @@ namespace SCSS.IdentityServer4.Models.RequestModels
         public string BirthDate { get; set; }
 
         public string Image { get; set; }
+
+        public string Role { get; set; }
 
         public string IDCard { get; set; }
     }
