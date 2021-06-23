@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using IdentityModel;
+﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SCSS.IdentityServer4.AuthenFilter;
@@ -187,7 +186,7 @@ namespace SCSS.IdentityServer4.Controllers
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         [Route(AccountUrlDefinition.UpdateAccount)]
         [ServiceFilter(typeof(AuthenFilterAttribute))]
         public async Task<ApiResponseModel> Update([FromForm] AccountUpdateRequestModel model)
@@ -206,7 +205,7 @@ namespace SCSS.IdentityServer4.Controllers
         /// <param name="id">The identifier.</param>
         /// <param name="status">The status.</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         [Route(AccountUrlDefinition.ChangeStatus)]
         [ServiceFilter(typeof(AuthenFilterAttribute))]
         public async Task<ApiResponseModel> ChangeStatus([FromForm] string id, int status)

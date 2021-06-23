@@ -52,6 +52,9 @@ namespace SCSS.IdentityServer4.AuthenFilter
                             case HttpStatusCodes.Forbidden:
                                 context.Result = new StatusCodeResult(HttpStatusCodes.Forbidden);
                                 break;
+                            case HttpStatusCodes.BadRequest:
+                                context.Result = new ObjectResult("Something wrong");
+                                break;
                         }
                     }
                 }
