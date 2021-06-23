@@ -11,6 +11,18 @@ namespace SCSS.Utilities.Constants
         public const bool TRUE = true;
         public const bool FALSE = false;
     }
+
+    public class SMSMesage
+    {
+        public static string SMSForRestorePasswod(string otp) => $"Mã OTP để khôi phục mật khẩu của bạn là {otp}";
+    }
+
+
+    public class CommonsConstants
+    {
+        public const string MessageCode = "MessageCode";
+    }
+
     public class AccountStatus
     {
         public const int NOT_APPROVED = 0;
@@ -29,6 +41,11 @@ namespace SCSS.Utilities.Constants
         };
     }
 
+
+    public class ResendToken
+    {
+        public const string RestorePassword = "resend_token_restore_password";
+    }
 
 
     public class AccountRoleConstants

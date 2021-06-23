@@ -32,7 +32,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
         #endregion
 
-
         #region Constructor
 
         public AccountService(IMapper mapper,
@@ -280,16 +279,9 @@ namespace SCSS.IdentityServer4.Services.Implementations
             var otp = await _phoneNumberTokenProvider.GenerateAsync("verify_number", _userManager, account);
 
             // Call SMS service here 
+            await _SMSService.SendSMS(phone, $"Message From SCSS {otp}");
 
-            var resendToken = await _dataProtectorTokenProvider.GenerateAsync("resend_token", _userManager, account);
-
-            var resData = new
-            {
-                ResendToken = resendToken,
-                Otp = otp
-            };
-
-            return ApiBaseResponse.OK(resData);
+            return ApiBaseResponse.OK();
         }
 
         #endregion
@@ -311,15 +303,11 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
             var otp = await _userManager.GenerateChangePhoneNumberTokenAsync(account, phone);
 
-
             // Call SMS service here 
+            var message = SMSMesage.SMSForRestorePasswod(otp);
+            await _SMSService.SendSMS(phone, message);
 
-            var resData = new
-            {
-                Otp = otp
-            };
-
-            return ApiBaseResponse.OK(resData);
+            return ApiBaseResponse.OK();
 
         }
 
@@ -330,20 +318,18 @@ namespace SCSS.IdentityServer4.Services.Implementations
         /// <summary>
         /// Restores the password.
         /// </summary>
-        /// <param name="phone">The phone.</param>
-        /// <param name="otp">The otp.</param>
-        /// <param name="newPassword">The new password.</param>
+        /// <param name="model">The model.</param>
         /// <returns></returns>
-        public async Task<ApiResponseModel> RestorePassword(string phone, string otp, string newPassword)
+        public async Task<ApiResponseModel> RestorePassword(RestorePasswordRequestModel model)
         {
-            var account = await _userManager.FindByNameAsync(phone);
+            var account = await _userManager.FindByNameAsync(model.Phone);
 
             if (account == null)
             {
                 return ApiBaseResponse.NotFound(MessageCode.DataNotFound);
             }
 
-            var result = await _userManager.VerifyChangePhoneNumberTokenAsync(account, otp, phone);
+            var result = await _userManager.VerifyChangePhoneNumberTokenAsync(account, model.OTP, model.Phone);
 
             if (!result)
             {
@@ -351,7 +337,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
             }
 
             var validate = new PasswordValidator<ApplicationUser>();
-            var res = await validate.ValidateAsync(_userManager, account, newPassword);
+            var res = await validate.ValidateAsync(_userManager, account, model.NewPassword);
 
             if (!res.Succeeded)
             {
@@ -361,7 +347,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(account);
 
-            var resetPassResult = await _userManager.ResetPasswordAsync(account, token, newPassword);
+            var resetPassResult = await _userManager.ResetPasswordAsync(account, token, model.NewPassword);
 
             if (resetPassResult.Succeeded)
             {
@@ -375,19 +361,29 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
         #region Change Password
 
-        public async Task<ApiResponseModel> ChangePassword(string id, string oldPassword, string newPassword)
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        public async Task<ApiResponseModel> ChangePassword(ChangePasswordRequestModel model)
         {
-            var account = await _userManager.FindByIdAsync(id);
+            var account = await _userManager.FindByIdAsync(model.Id);
 
             if (account == null)
             {
                 return ApiBaseResponse.NotFound(MessageCode.DataNotFound);
             }
 
-            //Validate New Pasword
-            // TODO
+            var validate = new PasswordValidator<ApplicationUser>();
+            var res = await validate.ValidateAsync(_userManager, account, model.NewPassword);
 
-            var result = await _userManager.ChangePasswordAsync(account, oldPassword, newPassword);
+            if (!res.Succeeded)
+            {
+                return ApiBaseResponse.Error(MessageCode.PasswordInValid);
+            }
+
+            var result = await _userManager.ChangePasswordAsync(account, model.OldPassword, model.NewPassword);
 
             if (result.Succeeded)
             {

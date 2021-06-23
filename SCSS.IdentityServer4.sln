@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCSS.IdentityServer4", "SCS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCSS.Utilities", "SCSS.Utilities\SCSS.Utilities.csproj", "{C27D837C-0B9D-46CA-BAA5-AA12D595D283}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Service", "03-Service", "{8EBEFBD2-98F3-4743-A7BE-E3CA971C7F5D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

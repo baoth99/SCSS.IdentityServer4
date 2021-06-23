@@ -1,8 +1,10 @@
 ﻿using IdentityServer4.Configuration;
+using IdentityServer4.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SCSS.IdentityServer4.Constants;
 using SCSS.IdentityServer4.Data.Identity;
+using SCSS.IdentityServer4.IdentityServerConfig;
 using SCSS.Utilities.Configurations;
 using System;
 using System.Collections.Generic;
@@ -52,6 +54,8 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                 option.ConfigureDbContext = b => b.UseSqlServer(AppSettingValues.SqlConnectionString,
                     sql => sql.MigrationsAssembly(migrationsAssembly));
             });
+
+            services.AddScoped<ICustomTokenRequestValidator, CustomTokenResponseGenerator>();
         }
     }
 }

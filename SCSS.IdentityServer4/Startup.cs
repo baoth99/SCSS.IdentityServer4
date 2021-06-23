@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Twilio;
 
 namespace SCSS.IdentityServer4
 {
@@ -69,6 +70,8 @@ namespace SCSS.IdentityServer4
             services.AddRazorPages();
             services.AddMvc();
 
+            TwilioClient.Init(AppSettingValues.TwilioAccountSID, AppSettingValues.TwilioAuthToken);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCSS.IdentityServer4", Version = "v1" });
@@ -85,15 +88,18 @@ namespace SCSS.IdentityServer4
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SCSS.IdentityServer4 v1"));
             }
 
+
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthentication();
 
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict, Secure = CookieSecurePolicy.None });
 
+            
+
             app.UseHsts();
             app.UseHttpsRedirection();
-
+            app.UseExceptionHandlerSetUp();
 
             app.UseInitializeDatabaseSetUp();
 

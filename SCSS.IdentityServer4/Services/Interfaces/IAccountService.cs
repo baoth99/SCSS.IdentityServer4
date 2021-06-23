@@ -19,8 +19,8 @@ namespace SCSS.IdentityServer4.Services.Interfaces
 
         Task<ApiResponseModel> SendOTPToRestorePassword(string phone);
 
-        Task<ApiResponseModel> RestorePassword(string phone, string otp, string newPassword);
+        Task<ApiResponseModel> RestorePassword(RestorePasswordRequestModel model);
 
-        Task<ApiResponseModel> ChangePassword(string id, string oldPassword, string newPassword);
+        Task<ApiResponseModel> ChangePassword(ChangePasswordRequestModel model);
     }
 }

@@ -27,5 +27,17 @@ namespace SCSS.Utilities.Constants
         public const string ChangePasswordUnSuccess = "CPUS0001";
 
         public const string PhoneNumberWasExisted = "PNWE0001";
+
+        public const string AccountIsNotApproved = "ANA0001";
+
+        public const string AccountIsBanning = "AB0001";
+
+        public const string AccountIsDelected = "AD0001";
+
+        public const string AccountIsInvalid = "AII0001";
+
+        public const string ClientIdEmpty = "CLIE0001";
+
+        public const string ClientIdInvalid = "CLIVD0001";
     }
 }

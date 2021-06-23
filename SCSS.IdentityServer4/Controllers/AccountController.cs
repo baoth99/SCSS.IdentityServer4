@@ -9,12 +9,6 @@ using SCSS.IdentityServer4.Models.RequestModels;
 using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.Utilities.BaseResponse;
 using SCSS.Utilities.Constants;
-using SCSS.Utilities.Validations;
-using SCSS.Utilities.Validations.ValidationModel;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.Controllers
@@ -53,7 +47,7 @@ namespace SCSS.IdentityServer4.Controllers
         {
             var user = new ApplicationUser()
             {
-                UserName = model.Phone,
+                UserName = model.UserName,
                 PhoneNumber = model.Phone,
             };
 
@@ -236,7 +230,7 @@ namespace SCSS.IdentityServer4.Controllers
         [ServiceFilter(typeof(AuthenFilterAttribute))]
         public async Task<ApiResponseModel> RestorePassword([FromForm] RestorePasswordRequestModel model)
         {
-            var result = await _accountService.RestorePassword(model.Phone, model.OTP, model.NewPassword);
+            var result = await _accountService.RestorePassword(model);
             return result;
         }
 
@@ -280,12 +274,17 @@ namespace SCSS.IdentityServer4.Controllers
 
         #region Change Password
 
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [Route(AccountUrlDefinition.ChangePassword)]
         [ServiceFilter(typeof(AuthenFilterAttribute))]
         public async Task<ApiResponseModel> ChangePassword([FromForm] ChangePasswordRequestModel model)
         {
-            var result = await _accountService.ChangePassword(model.Id, model.OldPassword, model.NewPassword);
+            var result = await _accountService.ChangePassword(model);
             return result;
         }
         #endregion

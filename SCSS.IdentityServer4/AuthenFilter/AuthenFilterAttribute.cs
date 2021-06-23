@@ -1,25 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IdentityServer4.Stores;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Primitives;
+using SCSS.IdentityServer4.SystemExtensions;
 using SCSS.Utilities.BaseResponse;
 using SCSS.Utilities.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.AuthenFilter
 {
     public class AuthenFilterAttribute : ActionFilterAttribute
     {
 
-        public AuthenFilterAttribute()
-        {
+        private readonly IClientStore _clientStore;
 
+        public AuthenFilterAttribute(IClientStore clientStore)
+        {
+            _clientStore = clientStore;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            
+            context.HttpContext.Request.Headers.TryGetValue("client_id", out StringValues clientIdVal);
+
+            var clientId = clientIdVal.ToString();
+
+            var result = _clientStore.FindClientByIdAsync(clientId).Result;
+            if (result == null)
+            {
+                context.ActionFilterResult(MessageCode.ClientIdInvalid ,"client_id is invalid", HttpStatusCodes.Unauthorized);
+            }
+
             base.OnActionExecuting(context);
         }
 

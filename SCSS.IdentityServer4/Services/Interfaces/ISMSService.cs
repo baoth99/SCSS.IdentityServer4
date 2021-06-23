@@ -7,6 +7,6 @@ namespace SCSS.IdentityServer4.Services.Interfaces
 {
     public interface ISMSService
     {
-
+        Task SendSMS(string phone, string message);
     }
 }

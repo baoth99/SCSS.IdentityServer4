@@ -19,10 +19,11 @@ namespace SCSS.Utilities.Configurations
             public const string ReadScaleOut = "SystemConfig:ReadScaleOut";
         }
 
-        public static class Sercurity
+        public static class Twilio
         {
-            public const string SercurityId = "Sercurity:SercurityId";
-            public const string SercuritySecret = "Sercurity:SercuritySecret";
+            public const string AccountSID = "Twilio:AccountSID";
+            public const string AuthToken = "Twilio:AuthToken";
+            public const string PhoneNumber = "Twilio:PhoneNumber";
         }
     }
 }

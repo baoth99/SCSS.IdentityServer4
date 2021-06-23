@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SCSS.Utilities.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace SCSS.IdentityServer4.Controllers
 {
+    [ApiController]
     [Route(ApplicationRestfulApi.BaseApiUrl)]
     [Produces(ApplicationRestfulApi.ApplicationProduce)]
     [Consumes(ApplicationRestfulApi.ApplicationConsumes)]
-    [ApiController]
     public class BaseController : ControllerBase
     {
     }
