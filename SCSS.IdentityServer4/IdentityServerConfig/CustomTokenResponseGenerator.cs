@@ -47,10 +47,6 @@ namespace SCSS.IdentityServer4.IdentityServerConfig
                             errorCode.Add(CommonsConstants.MessageCode, MessageCode.AccountIsBanning);
                             context.Result.Error = "Account is banning !";
                             break;
-                        case AccountStatus.DELECTED:
-                            errorCode.Add(CommonsConstants.MessageCode, MessageCode.AccountIsDelected);
-                            context.Result.Error = "Account is delected !";
-                            break;
                         default:
                             errorCode.Add(CommonsConstants.MessageCode, MessageCode.AccountIsInvalid);
                             context.Result.Error = "Account is invalid !";

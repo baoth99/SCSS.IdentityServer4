@@ -25,19 +25,15 @@ namespace SCSS.Utilities.Constants
 
     public class AccountStatus
     {
-        public const int NOT_APPROVED = 0;
-        public const int APPROVED = 1;
+        public const int NOT_APPROVED = 1;
         public const int ACTIVE = 2;
         public const int BANNING = 3;
-        public const int DELECTED = 4;
 
         public static readonly List<int> StatusCollection = new List<int>()
         {
             NOT_APPROVED,
-            APPROVED,
             ACTIVE,
             BANNING,
-            DELECTED
         };
     }
 
