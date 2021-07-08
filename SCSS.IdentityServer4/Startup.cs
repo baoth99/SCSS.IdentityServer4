@@ -53,8 +53,6 @@ namespace SCSS.IdentityServer4
             services.AddScoped<ISMSService, SMSService>();
             services.AddScoped<AuthenFilterAttribute>();
 
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddIISServerConfigSetUp();
 
             services.AddIdentityConfigSetUp();

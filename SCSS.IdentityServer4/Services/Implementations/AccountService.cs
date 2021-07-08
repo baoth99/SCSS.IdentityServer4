@@ -20,8 +20,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
     {
         #region Services 
 
-        private readonly IMapper _mapper;
-
         private readonly UserManager<ApplicationUser> _userManager;
 
         private readonly DataProtectorTokenProvider<ApplicationUser> _dataProtectorTokenProvider;
@@ -34,13 +32,11 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
         #region Constructor
 
-        public AccountService(IMapper mapper,
-                              UserManager<ApplicationUser> userManager,
+        public AccountService(UserManager<ApplicationUser> userManager,
                               DataProtectorTokenProvider<ApplicationUser> dataProtectorTokenProvider,
                               PhoneNumberTokenProvider<ApplicationUser> phoneNumberTokenProvider,
                               ISMSService SMSService)
         {
-            _mapper = mapper;
             _userManager = userManager;
             _dataProtectorTokenProvider = dataProtectorTokenProvider;
             _phoneNumberTokenProvider = phoneNumberTokenProvider;
@@ -60,15 +56,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
         /// <returns></returns>
         public async Task<ApiResponseModel> RegisterAccount(AccountRegistrationRequestModel model, string role, int status)
         {
-            var validateModel = _mapper.Map<AccountRegisterValidationModel>(model);
-            var validateResult = AccountValidations.RegisterValidation(validateModel);
-
-            //Validate
-            if (validateResult != null)
-            {
-                return validateResult;
-            }
-
             var existAccount = await _userManager.FindByNameAsync(model.Phone);
 
             if (existAccount != null)
