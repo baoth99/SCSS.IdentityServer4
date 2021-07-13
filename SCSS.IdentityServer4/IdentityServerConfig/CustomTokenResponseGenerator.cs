@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.IdentityServerConfig
 {
-    public class CustomTokenResponseGenerator : ICustomTokenRequestValidator
+    public class CustomTokenResponseGenerator : ICustomTokenRequestValidator 
     {
         private readonly UserManager<ApplicationUser> _userManager;
 

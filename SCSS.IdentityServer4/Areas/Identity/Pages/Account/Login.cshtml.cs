@@ -75,7 +75,6 @@ namespace SCSS.IdentityServer4.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-           // await _signInManager.SignOutAsync();
 
             returnUrl ??= Url.Content("~/");
 
