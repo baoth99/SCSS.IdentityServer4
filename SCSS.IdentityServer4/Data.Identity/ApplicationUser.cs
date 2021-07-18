@@ -11,5 +11,7 @@ namespace SCSS.IdentityServer4.Data.Identity
         public ICollection<IdentityUserClaim<string>> Claims { get; set; } = new List<IdentityUserClaim<string>>();
 
         public int? Status { get; set; }
+
+        public string ClientId { get; set; }
     }
 }

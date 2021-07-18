@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-using IdentityModel;
+﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using SCSS.IdentityServer4.Data.Identity;
 using SCSS.IdentityServer4.Models.RequestModels;
 using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.Utilities.BaseResponse;
 using SCSS.Utilities.Constants;
-using SCSS.Utilities.Validations;
-using SCSS.Utilities.Validations.ValidationModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,8 +59,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
             {
                 return ApiBaseResponse.Error(MessageCode.PhoneNumberWasExisted);
             }
-
-
             var user = new ApplicationUser()
             {
                 UserName = model.Phone,
@@ -71,6 +66,14 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 PhoneNumberConfirmed = BooleanConstants.TRUE,
                 Email = model.Email,
                 Status = status,
+            };
+
+            user.ClientId = role switch
+            {
+                AccountRoleConstants.SELLER => ClientIdConstant.SellerMobileApp,
+                AccountRoleConstants.COLLECTOR => ClientIdConstant.CollectorMobileApp,
+                AccountRoleConstants.DEALER => ClientIdConstant.DealerMobileApp,
+                _ => ClientIdConstant.WebAdmin,
             };
 
             #region  Add Identity Claims
@@ -96,7 +99,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Gender,
-                ClaimValue = model.Gender ? "Male" : "Female"
+                ClaimValue = model.Gender.ToString()
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()

@@ -36,6 +36,8 @@ namespace SCSS.Utilities.Constants
 
         public const string AccountIsInvalid = "AII0001";
 
+        public const string ClientIsWrong = "CIW0001";
+
         public const string ClientIdEmpty = "CLIE0001";
 
         public const string ClientIdInvalid = "CLIVD0001";

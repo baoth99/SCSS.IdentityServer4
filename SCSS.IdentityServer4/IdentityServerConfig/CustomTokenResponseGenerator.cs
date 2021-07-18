@@ -30,8 +30,21 @@ namespace SCSS.IdentityServer4.IdentityServerConfig
             if (grantType.Equals(OidcConstants.TokenRequest.Password))
             {
                 var username = raw.Get(OidcConstants.TokenRequest.UserName);
-
+               
                 var account = await _userManager.FindByNameAsync(username);
+
+
+                var clientId = raw.Get(OidcConstants.TokenRequest.ClientId);
+
+                if (!account.ClientId.Equals(clientId))
+                {
+                    context.Result.IsError = BooleanConstants.TRUE;
+                    var errorCode = new Dictionary<string, object>();
+                    errorCode.Add(CommonsConstants.MessageCode, MessageCode.ClientIsWrong);
+                    context.Result.Error = $"Account don't belong to {clientId} client";
+                    context.Result.CustomResponse = errorCode;
+                    return;
+                }
 
                 if (!account.Status.Equals(AccountStatus.ACTIVE))
                 {

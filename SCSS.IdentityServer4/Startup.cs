@@ -13,7 +13,6 @@ using SCSS.IdentityServer4.Services.Implementations;
 using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.IdentityServer4.SystemConfigurations;
 using SCSS.Utilities.Configurations;
-using Twilio;
 
 namespace SCSS.IdentityServer4
 {
@@ -63,9 +62,6 @@ namespace SCSS.IdentityServer4
 
             services.AddRazorPages();
             services.AddMvc();
-
-            TwilioClient.Init(AppSettingValues.TwilioAccountSID, AppSettingValues.TwilioAuthToken);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCSS.IdentityServer4", Version = "v1" });

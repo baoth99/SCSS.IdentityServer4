@@ -13,7 +13,7 @@ namespace SCSS.IdentityServer4.Models.RequestModels
 
         public string Email { get; set; }
 
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
 
         public string Phone { get; set; }
 

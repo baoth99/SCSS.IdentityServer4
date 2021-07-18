@@ -19,11 +19,12 @@ namespace SCSS.Utilities.Configurations
             public const string ReadScaleOut = "SystemConfig:ReadScaleOut";
         }
 
-        public static class Twilio
+        public static class ESMS
         {
-            public const string AccountSID = "Twilio:AccountSID";
-            public const string AuthToken = "Twilio:AuthToken";
-            public const string PhoneNumber = "Twilio:PhoneNumber";
+            public const string ApiKey = "ESMSService:ApiKey";
+            public const string SecrectKey = "ESMSService:SecretKey";
+            public const string BrandName = "ESMSService:BrandName";
+            public const string ApiUrl = "ESMSService:ApiUrl";
         }
     }
 }
