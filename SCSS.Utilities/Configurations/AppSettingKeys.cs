@@ -19,12 +19,24 @@ namespace SCSS.Utilities.Configurations
             public const string ReadScaleOut = "SystemConfig:ReadScaleOut";
         }
 
-        public static class ESMS
+        public static class Twilio
         {
-            public const string ApiKey = "ESMSService:ApiKey";
-            public const string SecrectKey = "ESMSService:SecretKey";
-            public const string BrandName = "ESMSService:BrandName";
-            public const string ApiUrl = "ESMSService:ApiUrl";
+            public const string AccountSID = "Twilio:AccountSID";
+            public const string AuthToken = "Twilio:AuthToken";
+            public const string PhoneNumber = "Twilio:PhoneNumber";
+        }
+
+        public static class AWS
+        {
+            public const string CloudWatchAccessKey = "AWSService:CloudWatchAccessKey";
+            public const string CloudWatchSecrectKey = "AWSService:CloudWatchSecrectKey";
+            public const string CloudWatchLogGroup = "AWSService:CloudWatchLogGroup";
+            public const string Region = "AWSService:Region";
+        }
+
+        public static class Logging
+        {
+            public const string Config = "Logging:Config";
         }
     }
 }

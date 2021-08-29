@@ -15,12 +15,16 @@ namespace SCSS.Utilities.Constants
     public class SMSMesage
     {
         public static string SMSForRestorePasswod(string otp) => $"Mã OTP để khôi phục mật khẩu của bạn là {otp}";
+
+        public static string SMSForOTPRegister(string otp) => $"Mã OTP để đăng kí tài khoản của bạn là {otp}";
+
+        public static string SMSForLogin(string otp) => $"Mã OTP để đăng nhập là {otp}";
     }
 
 
     public class CommonsConstants
     {
-        public const string MessageCode = "messageCode";
+        public const string MessageCode = "msgCode";
     }
 
     public class AccountStatus
@@ -47,8 +51,12 @@ namespace SCSS.Utilities.Constants
     }
 
 
-    public class ResendToken
+    public class IdentityServer
     {
+        public static string ClientId { get; set; }
+
+        public const string GrantType = "phone_number_token";
+        public const string VerifyOTP = "verify_otp_number";
         public const string RestorePassword = "resend_token_restore_password";
     }
 
@@ -63,6 +71,7 @@ namespace SCSS.Utilities.Constants
 
     public class RegularExpression
     {
-        public const string PhoneRegex = "(84|0[3|5|7|8|9])+([0-9]{8})\b";
+        public const string PhoneRegex = @"(84|0[3|5|7|8|9])+([0-9]{8})\b";
+        public const string EmailRegex = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
     }
 }

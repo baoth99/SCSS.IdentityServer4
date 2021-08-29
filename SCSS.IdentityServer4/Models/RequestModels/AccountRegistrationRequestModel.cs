@@ -24,5 +24,7 @@ namespace SCSS.IdentityServer4.Models.RequestModels
         public string Image { get; set; }
 
         public string IDCard { get; set; }
+
+        public string RegisterToken { get; set; }
     }
 }

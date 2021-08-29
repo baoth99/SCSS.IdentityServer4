@@ -13,14 +13,22 @@ namespace SCSS.IdentityServer4.Services.Interfaces
 
         Task<ApiResponseModel> UpdateAccount(AccountUpdateRequestModel model);
 
-        Task<ApiResponseModel> ChangeStatus(string id, int status);
+        Task<ApiResponseModel> ChangeStatus(AccountChangeStatusRequestModel model);
 
-        Task<ApiResponseModel> SendOTP(string phone);
+        Task<ApiResponseModel> SendOTPToRegister(string phone);
+
+        Task<ApiResponseModel> ConfirmOTPToRegister(string otp, string phone);
+
+        Task<ApiResponseModel> SenOTPToLogin(string phone);
 
         Task<ApiResponseModel> SendOTPToRestorePassword(string phone);
+
+        Task<ApiResponseModel> ConfirmOTPToRestore(ConfirmOTPRequestModel model);
 
         Task<ApiResponseModel> RestorePassword(RestorePasswordRequestModel model);
 
         Task<ApiResponseModel> ChangePassword(ChangePasswordRequestModel model);
+
+        
     }
 }

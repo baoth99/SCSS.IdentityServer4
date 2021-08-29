@@ -21,7 +21,7 @@
                 <div class="card bg-secondary border-0 mb-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            <small>Sign in with credentials</small>
+                            <small>Đăng Nhập Với Tài Khoản Của Hệ Thống</small>
                         </div>
                         <form id="account" method="post" role="form">
                             <div class="form-group mb-3">
@@ -29,7 +29,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input asp-for="Input.Email" placeholder="Email" autocomplete="new-email" class="form-control" />
+                                    <input asp-for="Input.Email" placeholder="Tài Khoản" autocomplete="new-email" class="form-control" />
                                     @*<span asp-validation-for="Input.Email" class="text-danger"></span>*@
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input asp-for="Input.Password" placeholder="Password" autocomplete="new-password" class="form-control" />
+                                    <input asp-for="Input.Password" placeholder="Mật Khẩu" autocomplete="new-password" class="form-control" />
                                     @*<span asp-validation-for="Input.Password" class="text-danger"></span>*@
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 <div asp-validation-summary="All" class="text-danger"></div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                                <button type="submit" class="btn btn-primary my-4">Đăng Nhập</button>
                             </div>
                         </form>
                     </div>

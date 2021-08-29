@@ -11,7 +11,10 @@ namespace SCSS.IdentityServer4.Constants
         public const string ChangeStatus = "change-status";
         public const string RestorePassword = "restore-password";
         public const string SendOTP = "send-otp";
+        public const string ConfirmOTPToRegister = "confirm-otp-register";
         public const string SendOTPToRestorePassword = "send-otp-restore-password";
+        public const string SendOTPToLogin = "send-otp-login";
+        public const string ConfirmOTP = "confirm-otp";
         public const string ChangePassword = "change-password";
     }
 

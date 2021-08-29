@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.Models.RequestModels
 {
-    public class RestorePasswordRequestModel
+    public class ConfirmOTPRequestModel
     {
         public string Phone { get; set; }
 
-        public string Token { get; set; }
-
-        public string NewPassword { get; set; }
+        public string OTP { get; set; }
     }
 }

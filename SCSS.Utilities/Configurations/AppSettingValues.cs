@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SCSS.Utilities.Configurations
 {
     public class AppSettingValues
@@ -14,13 +9,21 @@ namespace SCSS.Utilities.Configurations
 
         public static bool ReadScaleOut => ConfigurationHelper.GetValue<bool>(AppSettingKeys.SystemConfig.ReadScaleOut);
 
-        public static string ESMSApiKey => ConfigurationHelper.GetValue<string>(AppSettingKeys.ESMS.ApiKey);
+        public static string TwilioAccountSID => ConfigurationHelper.GetValue<string>(AppSettingKeys.Twilio.AccountSID);
 
-        public static string ESMSApiSecret => ConfigurationHelper.GetValue<string>(AppSettingKeys.ESMS.SecrectKey);
+        public static string TwilioAuthToken => ConfigurationHelper.GetValue<string>(AppSettingKeys.Twilio.AuthToken);
 
-        public static string ESMSBrandName => ConfigurationHelper.GetValue<string>(AppSettingKeys.ESMS.BrandName);
+        public static string TwilioPhoneNumber => ConfigurationHelper.GetValue<string>(AppSettingKeys.Twilio.PhoneNumber);
 
-        public static string ESMSApiUrl => ConfigurationHelper.GetValue<string>(AppSettingKeys.ESMS.ApiUrl);
+        public static string AWSRegion => ConfigurationHelper.GetValue<string>(AppSettingKeys.AWS.Region);
+
+        public static string AWSCloudWatchAccessKey => ConfigurationHelper.GetValue<string>(AppSettingKeys.AWS.CloudWatchAccessKey);
+
+        public static string AWSCloudWatchSecrectKey => ConfigurationHelper.GetValue<string>(AppSettingKeys.AWS.CloudWatchSecrectKey);
+
+        public static string AWSCloudWatchLogGroup => ConfigurationHelper.GetValue<string>(AppSettingKeys.AWS.CloudWatchLogGroup);
+
+        public static string LoggingConfig => ConfigurationHelper.GetValue<string>(AppSettingKeys.Logging.Config);
 
     }
 }

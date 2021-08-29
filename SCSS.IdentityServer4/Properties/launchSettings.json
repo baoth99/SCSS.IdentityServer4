@@ -14,7 +14,7 @@
       "launchBrowser": true,
       "launchUrl": ".well-known/openid-configuration",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production" //Development // Production
       }
     },
     "SCSS.IdentityServer4": {

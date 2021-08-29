@@ -208,10 +208,75 @@ namespace SCSS.IdentityServer4.Controllers
         [HttpPost]
         [Route(AccountUrlDefinition.ChangeStatus)]
         [ServiceFilter(typeof(AuthenFilterAttribute))]
-        public async Task<ApiResponseModel> ChangeStatus([FromForm] string id, int status)
+        public async Task<ApiResponseModel> ChangeStatus([FromForm] AccountChangeStatusRequestModel model)
         {
-            var result = await _accountService.ChangeStatus(id, status);
+            var result = await _accountService.ChangeStatus(model);
             return result;
+        }
+
+        #endregion
+
+        #region Send OTP To Register
+
+        /// <summary>
+        /// Sends the otp to register.
+        /// </summary>
+        /// <param name="phone">The phone.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(AccountUrlDefinition.SendOTP)]
+        [ServiceFilter(typeof(AuthenFilterAttribute))]
+        public async Task<ApiResponseModel> SendOTPToRegister([FromForm] string phone)
+        {
+            var result = await _accountService.SendOTPToRegister(phone);
+            return result;
+        }
+
+        #endregion
+
+        #region Confirm OTP to Register
+
+        /// <summary>
+        /// Confirms the otp to register.
+        /// </summary>
+        /// <param name="otp">The otp.</param>
+        /// <param name="phone">The phone.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(AccountUrlDefinition.ConfirmOTPToRegister)]
+        [ServiceFilter(typeof(AuthenFilterAttribute))]
+        public async Task<ApiResponseModel> ConfirmOTPToRegister([FromForm] string otp, [FromForm] string phone)
+        {
+            return await _accountService.ConfirmOTPToRegister(otp, phone);
+        }
+        #endregion
+
+        #region Send OTP to Restore Password
+
+        /// <summary>
+        /// Sends the otp to restore password.
+        /// </summary>
+        /// <param name="phone">The phone.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(AccountUrlDefinition.SendOTPToRestorePassword)]
+        [ServiceFilter(typeof(AuthenFilterAttribute))]
+        public async Task<ApiResponseModel> SendOTPToRestorePassword([FromForm] string phone)
+        {
+            var result = await _accountService.SendOTPToRestorePassword(phone);
+            return result;
+        }
+
+        #endregion
+
+        #region Confirm OTP To Restore Password
+
+        [HttpPost]
+        [Route(AccountUrlDefinition.ConfirmOTP)]
+        [ServiceFilter(typeof(AuthenFilterAttribute))]
+        public async Task<ApiResponseModel> ConfirmOTP([FromForm] ConfirmOTPRequestModel model)
+        {
+            return await _accountService.ConfirmOTPToRestore(model);
         }
 
         #endregion
@@ -235,39 +300,21 @@ namespace SCSS.IdentityServer4.Controllers
 
         #endregion
 
-        #region Send OTP
+        #region Send OTP to Login
 
         /// <summary>
-        /// Sends the otp.
+        /// Sends the otp to login.
         /// </summary>
         /// <param name="phone">The phone.</param>
         /// <returns></returns>
         [HttpPost]
-        [Route(AccountUrlDefinition.SendOTP)]
+        [Route(AccountUrlDefinition.SendOTPToLogin)]
         [ServiceFilter(typeof(AuthenFilterAttribute))]
-        public async Task<ApiResponseModel> SendOTP([FromForm] string phone)
+        public async Task<ApiResponseModel> SendOTPToLogin([FromForm] string phone)
         {
-            var result = await _accountService.SendOTP(phone);
-            return result;
+            return await _accountService.SenOTPToLogin(phone);
         }
 
-        #endregion
-
-        #region Send OTP to Restore Password
-
-        /// <summary>
-        /// Sends the otp to restore password.
-        /// </summary>
-        /// <param name="phone">The phone.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route(AccountUrlDefinition.SendOTPToRestorePassword)]
-        [ServiceFilter(typeof(AuthenFilterAttribute))]
-        public async Task<ApiResponseModel> SendOTPToRestorePassword([FromForm] string phone)
-        {
-            var result = await _accountService.SendOTPToRestorePassword(phone);
-            return result;
-        }
 
         #endregion
 

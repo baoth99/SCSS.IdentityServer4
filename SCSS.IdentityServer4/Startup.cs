@@ -13,6 +13,10 @@ using SCSS.IdentityServer4.Services.Implementations;
 using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.IdentityServer4.SystemConfigurations;
 using SCSS.Utilities.Configurations;
+using SCSS.Utilities.Helper;
+using System;
+using System.Net;
+using Twilio;
 
 namespace SCSS.IdentityServer4
 {
@@ -28,7 +32,7 @@ namespace SCSS.IdentityServer4
             Enviroment = enviroment;
         }
 
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -40,8 +44,11 @@ namespace SCSS.IdentityServer4
             ConfigurationHelper.IsDevelopment = Enviroment.IsDevelopment();
             ConfigurationHelper.IsTesting = Enviroment.EnvironmentName.Equals("Testing");
             ConfigurationHelper.IsProduction = Enviroment.IsProduction();
+            FileHelper.ContentRootPath = Enviroment.ContentRootPath;
 
             #endregion
+
+            services.AddIISServerConfigSetUp();
 
             services.AddRouting(options =>
             {
@@ -52,31 +59,47 @@ namespace SCSS.IdentityServer4
             services.AddScoped<ISMSService, SMSService>();
             services.AddScoped<AuthenFilterAttribute>();
 
-            services.AddIISServerConfigSetUp();
 
             services.AddIdentityConfigSetUp();
 
             services.AddIdentityServer4SetUp();
 
             services.AddControllers();
+            services.AddHttpContextAccessor();
 
             services.AddRazorPages();
-            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider();
+
+            services.AddMemoryCache();          
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(3);
+            });
+
+            services.AddLoggingSetUp();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCSS.IdentityServer4", Version = "v1" });
             });
+
+            string accountSid = AppSettingValues.TwilioAccountSID;
+            string authToken = AppSettingValues.TwilioAuthToken;
+
+            TwilioClient.Init(accountSid, authToken);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+
+            if (env.IsDevelopment() || env.IsProduction())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SCSS.IdentityServer4 v1"));
             }
+            app.UseDeveloperExceptionPage();
 
 
             app.UseRouting();
@@ -96,6 +119,8 @@ namespace SCSS.IdentityServer4
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

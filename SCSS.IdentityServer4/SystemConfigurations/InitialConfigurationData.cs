@@ -162,7 +162,6 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
                                                                                //the lifetime of the refresh token will be renewed
                                                                                //when refreshing the token, the lifetime of the refresh token will be renewed
-                                        SlidingRefreshTokenLifetime = 3600 * 2,
                                         AccessTokenType = AccessTokenType.Jwt, 
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
@@ -177,7 +176,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "id_card"
                                             },
                                         AllowAccessTokensViaBrowser = true,
-                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
+                                        AccessTokenLifetime = 3600 * 5 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
 
@@ -198,7 +197,6 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
                                                                                //the lifetime of the refresh token will be renewed
                                                                                //when refreshing the token, the lifetime of the refresh token will be renewed
-                                        SlidingRefreshTokenLifetime = 3600 * 4,
                                         AccessTokenType = AccessTokenType.Jwt,
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
@@ -212,7 +210,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "role",
                                             "id_card"
                                             },
-                                        AccessTokenLifetime = 3600 * 2 , //Set Token lifetime
+                                        AccessTokenLifetime = 3600 * 5 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
 
@@ -233,7 +231,6 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
                                                                                //the lifetime of the refresh token will be renewed
                                                                                //when refreshing the token, the lifetime of the refresh token will be renewed
-                                        SlidingRefreshTokenLifetime = 3600 * 2,
                                         AccessTokenType = AccessTokenType.Jwt,
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
@@ -247,7 +244,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "role",
                                             "id_card"
                                             },
-                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
+                                        AccessTokenLifetime = 3600 * 5 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
                                     },
@@ -267,7 +264,6 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                         RefreshTokenExpiration = TokenExpiration.Sliding,//when refreshing the token,
                                                                                //the lifetime of the refresh token will be renewed
                                                                                //when refreshing the token, the lifetime of the refresh token will be renewed
-                                        SlidingRefreshTokenLifetime = 3600 * 4,
                                         AccessTokenType = AccessTokenType.Jwt,
                                         UpdateAccessTokenClaimsOnRefresh = true,
                                         // scopes that client can access to
@@ -281,7 +277,7 @@ namespace SCSS.IdentityServer4.SystemConfigurations
                                             "role",
                                             "id_card"
                                             },
-                                        AccessTokenLifetime = 3600 * 4 , //Set Token lifetime
+                                        AccessTokenLifetime = 3600 * 5 , //Set Token lifetime
                                         RefreshTokenUsage = TokenUsage.OneTimeOnly,
                                         AllowOfflineAccess = true,
                                     }

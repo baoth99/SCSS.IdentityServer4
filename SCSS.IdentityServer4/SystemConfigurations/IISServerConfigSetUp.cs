@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace SCSS.IdentityServer4.SystemConfigurations
@@ -15,6 +16,16 @@ namespace SCSS.IdentityServer4.SystemConfigurations
             {
                 throw new ArgumentException(nameof(services));
             }
+
+
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => {
+                return true;
+            };
+
+            //ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                                                   | SecurityProtocolType.Tls11
+                                                   | SecurityProtocolType.Tls12;
 
             services.Configure<IISOptions>(iis =>
             {

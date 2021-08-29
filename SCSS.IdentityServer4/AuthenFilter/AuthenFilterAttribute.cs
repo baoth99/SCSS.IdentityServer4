@@ -28,6 +28,10 @@ namespace SCSS.IdentityServer4.AuthenFilter
             if (result == null)
             {
                 context.ActionFilterResult(MessageCode.ClientIdInvalid ,"client_id is invalid", HttpStatusCodes.Unauthorized);
+            } 
+            else
+            {
+                IdentityServer.ClientId = result.ClientId;
             }
 
             base.OnActionExecuting(context);
@@ -53,7 +57,7 @@ namespace SCSS.IdentityServer4.AuthenFilter
                                 context.Result = new StatusCodeResult(HttpStatusCodes.Forbidden);
                                 break;
                             case HttpStatusCodes.BadRequest:
-                                context.Result = new ObjectResult("Something wrong");
+                                context.Result = new BadRequestObjectResult("Something wrong !");
                                 break;
                         }
                     }
@@ -63,7 +67,6 @@ namespace SCSS.IdentityServer4.AuthenFilter
             {
                 // Ignore
             }
-            base.OnActionExecuted(context);
         }
     }
 }

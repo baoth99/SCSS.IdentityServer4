@@ -44,11 +44,11 @@ namespace SCSS.IdentityServer4.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Vui lòng nhập tài khoản")]
+            [EmailAddress(ErrorMessage = "Tài khoản sai định dạng ")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
