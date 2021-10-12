@@ -5,6 +5,7 @@ namespace SCSS.IdentityServer4.Constants
     {
         public const string RegisterAccountDemo = "register-demo";
         public const string RegisterDealerAccount = "register/dealer";
+        public const string RegisterDealerMemberAccount = "register/dealer-member";
         public const string RegisterCollectorAccount = "register/collector";
         public const string RegisterSellerAccount = "register/seller";
         public const string UpdateAccount = "update";

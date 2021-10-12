@@ -8,6 +8,7 @@ using SCSS.IdentityServer4.Models.RequestModels;
 using SCSS.IdentityServer4.Services.Interfaces;
 using SCSS.Utilities.BaseResponse;
 using SCSS.Utilities.Constants;
+using SCSS.Utilities.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,6 +85,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
             _cache.Remove(key);
 
+
             var existAccount = await _userManager.FindByNameAsync(model.Phone);
 
             if (existAccount != null)
@@ -97,8 +99,10 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 UserName = model.Phone,
                 PhoneNumber = model.Phone,
                 PhoneNumberConfirmed = BooleanConstants.TRUE,
-                Email = model.Email,
+                Email = StringHelper.ValidateString(model.Email),
                 Status = status,
+                LockoutEnabled = BooleanConstants.FALSE,
+                EmailConfirmed = BooleanConstants.FALSE
             };
 
             user.ClientId = role switch
@@ -106,6 +110,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 AccountRoleConstants.SELLER => ClientIdConstant.SellerMobileApp,
                 AccountRoleConstants.COLLECTOR => ClientIdConstant.CollectorMobileApp,
                 AccountRoleConstants.DEALER => ClientIdConstant.DealerMobileApp,
+                AccountRoleConstants.DEALER_MEMBER => ClientIdConstant.DealerMobileApp,
                 _ => ClientIdConstant.WebAdmin,
             };
 
@@ -114,47 +119,46 @@ namespace SCSS.IdentityServer4.Services.Implementations
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Address,
-                ClaimValue = model.Address,
+                ClaimValue = StringHelper.ValidateString(model.Address)
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Role,
-                ClaimValue = role
+                ClaimValue = StringHelper.ValidateString(role)
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Gender,
-                ClaimValue = model.Gender.ToString()
+                ClaimValue = StringHelper.ValidateString(model.Gender.ToString())
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.BirthDate,
-                ClaimValue = model.BirthDate
+                ClaimValue = StringHelper.ValidateString(model.BirthDate)
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Name,
-                ClaimValue = model.Name
+                ClaimValue = StringHelper.ValidateString(model.Name)
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Picture,
-                ClaimValue = model.Image
+                ClaimValue = StringHelper.ValidateString(model.Image)
             });
 
             user.Claims.Add(new IdentityUserClaim<string>()
             {
                 ClaimType = JwtClaimTypes.Id,
-                ClaimValue = model.IDCard
+                ClaimValue = StringHelper.ValidateString(model.IDCard)
             });
 
             #endregion
-
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -163,9 +167,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 await _userManager.AddToRoleAsync(currentUser, role);
                 _logger.LogInfo(LoggerMessages.RegisterUserSucess(model.Phone, model.Name, role));
 
-                var accountId = Guid.Parse(currentUser.Id);
-
-                return ApiBaseResponse.OK(accountId);
+                return ApiBaseResponse.OK(currentUser.Id);
             }
 
             _logger.LogInfo(LoggerMessages.RegisterUserFail(model.Phone, model.Name, role));
@@ -192,13 +194,10 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 return ApiBaseResponse.NotFound(MessageCode.DataNotFound);
             }
 
-            if (!string.IsNullOrEmpty(model.Email) || Regex.IsMatch(model.Email, RegularExpression.EmailRegex))
-            {
-                account.Email = model.Email;
-                await _userManager.UpdateAsync(account);
-            }
+          
+            account.Email = StringHelper.ValidateString(model.Email);
+            await _userManager.UpdateAsync(account);
             
-
 
             // Get Now Claim
             var claims = await _userManager.GetClaimsAsync(account);
@@ -220,17 +219,17 @@ namespace SCSS.IdentityServer4.Services.Implementations
 
             #region Add Claim
 
-            updateClaims.Add(new Claim(JwtClaimTypes.Address, model.Address));
+            updateClaims.Add(new Claim(JwtClaimTypes.Address, StringHelper.ValidateString(model.Address)));
 
-            updateClaims.Add(new Claim(JwtClaimTypes.Gender, model.Gender.ToString()));
+            updateClaims.Add(new Claim(JwtClaimTypes.Gender, StringHelper.ValidateString(model.Gender.ToString())));
 
-            updateClaims.Add(new Claim(JwtClaimTypes.BirthDate, model.BirthDate));
+            updateClaims.Add(new Claim(JwtClaimTypes.BirthDate, StringHelper.ValidateString(model.BirthDate)));
 
-            updateClaims.Add(new Claim(JwtClaimTypes.Name, model.Name));
+            updateClaims.Add(new Claim(JwtClaimTypes.Name, StringHelper.ValidateString(model.Name)));
 
-            updateClaims.Add(new Claim(JwtClaimTypes.Picture, model.Image));
+            updateClaims.Add(new Claim(JwtClaimTypes.Picture, StringHelper.ValidateString(model.Image)));
 
-            updateClaims.Add(new Claim(JwtClaimTypes.Id, model.IDCard));
+            updateClaims.Add(new Claim(JwtClaimTypes.Id, StringHelper.ValidateString(model.IDCard)));
 
             #endregion
 
@@ -360,7 +359,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
             _httpContextAccessor.HttpContext.Session.SetString(phone, otp);
 
             // Send SMS here !!!!
-            var message = SMSMesage.SMSForOTPRegister(otp);
+            var message = SMSMesage.OTP(otp);
             await _SMSService.SendSMS(phone, message);
 
             return ApiBaseResponse.OK();
@@ -421,7 +420,7 @@ namespace SCSS.IdentityServer4.Services.Implementations
             var otp = await _userManager.GenerateChangePhoneNumberTokenAsync(account, phone);
 
             // Call SMS service here 
-            var message = SMSMesage.SMSForRestorePasswod(otp);
+            var message = SMSMesage.OTP(otp);
             await _SMSService.SendSMS(phone, message);
 
             _logger.LogInfo(LoggerMessages.OTPConfirm("Restore password"));
@@ -482,15 +481,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
                 return ApiBaseResponse.NotFound(MessageCode.DataNotFound);
             }
 
-            var validate = new PasswordValidator<ApplicationUser>();
-
-            var res = await validate.ValidateAsync(_userManager, account, model.NewPassword);
-
-            if (!res.Succeeded)
-            {
-                return ApiBaseResponse.Error(MessageCode.PasswordInValid);
-            }
-
             var resetPassResult = await _userManager.ResetPasswordAsync(account, model.Token, model.NewPassword);
 
             if (resetPassResult.Succeeded)
@@ -518,14 +508,6 @@ namespace SCSS.IdentityServer4.Services.Implementations
             if (account == null)
             {
                 return ApiBaseResponse.NotFound(MessageCode.DataNotFound);
-            }
-
-            var validate = new PasswordValidator<ApplicationUser>();
-            var res = await validate.ValidateAsync(_userManager, account, model.NewPassword);
-
-            if (!res.Succeeded)
-            {
-                return ApiBaseResponse.Error(MessageCode.PasswordInValid);
             }
 
             var result = await _userManager.ChangePasswordAsync(account, model.OldPassword, model.NewPassword);

@@ -143,6 +143,25 @@ namespace SCSS.IdentityServer4.Controllers
 
         #endregion
 
+        #region Register Dealer Member Account
+
+        /// <summary>
+        /// Registers the dealer account.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(AccountUrlDefinition.RegisterDealerMemberAccount)]
+        [Consumes(ApplicationRestfulApi.ApplicationConsumes)]
+        [ServiceFilter(typeof(AuthenFilterAttribute))]
+        public async Task<ApiResponseModel> RegisterDealerMemberAccount([FromForm] AccountRegistrationRequestModel model)
+        {
+            var result = await _accountService.RegisterAccount(model, AccountRoleConstants.DEALER_MEMBER, AccountStatus.NOT_APPROVED);
+            return result;
+        }
+
+        #endregion
+
         #region Register Collector Account
 
         /// <summary>
@@ -155,7 +174,7 @@ namespace SCSS.IdentityServer4.Controllers
         [ServiceFilter(typeof(AuthenFilterAttribute))]
         public async Task<ApiResponseModel> RegisterCollectorAccount([FromForm] AccountRegistrationRequestModel model)
         {
-            var result = await _accountService.RegisterAccount(model, AccountRoleConstants.DEALER, AccountStatus.NOT_APPROVED);
+            var result = await _accountService.RegisterAccount(model, AccountRoleConstants.COLLECTOR, AccountStatus.NOT_APPROVED);
             return result;
         }
 
@@ -249,6 +268,7 @@ namespace SCSS.IdentityServer4.Controllers
         {
             return await _accountService.ConfirmOTPToRegister(otp, phone);
         }
+
         #endregion
 
         #region Send OTP to Restore Password

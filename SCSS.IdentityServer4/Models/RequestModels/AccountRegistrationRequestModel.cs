@@ -21,6 +21,8 @@ namespace SCSS.IdentityServer4.Models.RequestModels
 
         public string BirthDate { get; set; }
 
+        public string IsDealerMember { get; set; }
+
         public string Image { get; set; }
 
         public string IDCard { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCSS.Utilities.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,13 @@ namespace SCSS.Utilities.Helper
         {
             return string.IsNullOrEmpty(text);
         }
+
+        public static string ValidateString(string text)
+        {
+            return string.IsNullOrEmpty(text) ? CommonsConstants.NoContent : text;
+        }
+
     }
+
+
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SCSS.IdentityServer4.Data.IdenittyEF;
 using SCSS.IdentityServer4.Data.Identity;
 using SCSS.Utilities.Configurations;
+using SCSS.Utilities.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +36,19 @@ namespace SCSS.IdentityServer4.SystemConfigurations
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                //options.Lockout.MaxFailedAccessAttempts = 10;
+                //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                options.Password.RequireDigit = BooleanConstants.FALSE;
+                options.Password.RequireLowercase = BooleanConstants.FALSE;
+                options.Password.RequireNonAlphanumeric = BooleanConstants.FALSE;
+                options.Password.RequireUppercase = BooleanConstants.FALSE;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
             });
 
             services.Configure<DataProtectionTokenProviderOptions>(options =>
                 options.TokenLifespan = TimeSpan.FromDays(2)
-                );
+            );
         }
     }
 }

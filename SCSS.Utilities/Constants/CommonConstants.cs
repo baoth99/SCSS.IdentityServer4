@@ -14,17 +14,23 @@ namespace SCSS.Utilities.Constants
 
     public class SMSMesage
     {
-        public static string SMSForRestorePasswod(string otp) => $"Mã OTP để khôi phục mật khẩu của bạn là {otp}";
+        private const string HeaderMessage = "VeChaiXANH xin thong bao: \n";
 
-        public static string SMSForOTPRegister(string otp) => $"Mã OTP để đăng kí tài khoản của bạn là {otp}";
+        public static string OTP(string otp)
+        {
+            var sms = HeaderMessage +
+                      $"Ma OTP cua ban la {otp}. OTP co hieu luc trong 3 phut. Tran trong !";
+            return sms;
+        }
 
-        public static string SMSForLogin(string otp) => $"Mã OTP để đăng nhập là {otp}";
+        public static string SMSForLogin(string otp) => HeaderMessage + $"Mã OTP để đăng nhập là {otp}";
     }
 
 
     public class CommonsConstants
     {
         public const string MessageCode = "msgCode";
+        public const string NoContent = "N/A";
     }
 
     public class AccountStatus
@@ -67,6 +73,7 @@ namespace SCSS.Utilities.Constants
         public const string SELLER = "Seller";
         public const string COLLECTOR = "Collector";
         public const string DEALER = "Dealer";
+        public const string DEALER_MEMBER = "DealerMember";
     }
 
     public class RegularExpression
